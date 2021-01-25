@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老张</title>
+    <link rel="stylesheet" th:href="@{/admin/vendor/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/home/plugin/layui/css/layui.css}">
+
+    <link rel="stylesheet" th:href="@{/admin/vendor/editor.md/css/style.css}">
+    <link rel="stylesheet" th:href="@{/home/css/common.css}">
+    <link rel="stylesheet" th:href="@{/home/css/mobile.css}">
+    <link rel="stylesheet" th:href="@{/home/plugin/prism/prism.css}"><!--代码高亮工具-->
+    <link rel="stylesheet" th:href="@{/admin/vendor/editor.md/css/editormd.preview.css}" />
+
+</head>
+<body>
+    <header>
+        <div class="layui-row header-bigimg"></div>
+        <div class="layui-row subject-color nav-row">
+            <div class="main-content nav-menu">
+                <div class="layui-row">
+                    <div class="layui-col-md2 logo-box">
+                        <a href="#" title="首页，聚繁分享">
+                            <img src="imgs/canreplace/logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="layui-col-md7 menu-box">
+                        <ul class="menu-ul">
+                           <a href="home.html">
+                               <li>首页</li>
+                           </a>
+                            <a href="columntype.html">
+                                <li>技术文章</li>
+                            </a>
+                            <a href="#">
+                                <li>程序人生</li>
+                            </a>
+                            <a href="#">
+                                <li>生活</li>
+                            </a>
+                            <a href="#">
+                                <li>工具分享</li>
+                            </a>
+                            <a href="#">
+                                <li>关于我、关于博客</li>
+                            </a>
+                        </ul>
+                    </div>
+                    <div class="layui-col-md3 search-box">
+                        <div class="search-input-div">
+                            <div class="layui-row">
+                                <div class="layui-col-md10 input-box">
+                                    <input class="search-input" placeholder="请输入关键字进行搜索">
+                                </div>
+                                <div class="layui-col-md2 search-btn-box">
+                                    <img src="imgs/icon/search.png" height="36" width="36"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="main-content item-box">
+        <div class="item-type">
+            <div class="column-item layui-row">
+                <div class="column-item-title layui-row subject-second-color font-color1 font-bold">同类热门文章</div>
+                <div class="jianjie-p layui-row">
+                    <ul class="remen-ul">
+                        <li>
+                            <div class="remen-title layui-row">
+                                <a href="#">每个强者都会有背后的辛酸挫折每个强者都会有背后的辛酸挫个强者都会有背后个强者都会有背后折</a>
+                            </div>
+                            <div class="remen-readnum layui-row">阅读：2019</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="item-list">
+            <div class="article-content-box layui-row">
+                <h1 th:text="${article.getArticleTitle()}"></h1>
+                <div class="article-param layui-row">
+                    <span>最后修改时间：</span><span th:text="${#dates.format(article.getArticleUpdateTime(),'yyyy-MM-dd HH:mm:ss')}"></span>
+                    <span>作者：</span><span>laozhang</span></span>
+                    <span>阅读数:</span><span th:text="${article.getArticleViewCount()}"></span>
+                    <span>评论数:</span><span th:text="${article.getArticleCommentCount()}"></span>&nbsp;&nbsp;
+                    <span class="hz-span layui-badge layui-bg-gray">编程语言</span>
+                    <span class="hz-span layui-badge layui-bg-gray">编程基础</span>
+                    <span class="hz-span layui-badge layui-bg-gray">编程入门</span>
+                </div>
+                <div class="article-prompt">
+                    版权声明：本文为博主原创文章，如果转载请给出原文链接：http://www.jufanshare.com/content/30.html
+                </div>
+                <div class="article-prompt">
+                    阅读提示：此篇文章需要至少会使用一种计算机编程语言，掌握了一门计算机编程语言的基础部分才能阅读懂此篇文章。
+                </div>
+                <div name="articleContent" id="content">
+                    <textarea style="display:none;" th:text="${article.getArticleContent()}"></textarea>
+                </div>
+                <div class="article-author layui-row">_____by 作者：<a href="#">大BUG</a></div>
+                <div class="contact-row layui-row">
+                    <div class="contact-me-box">
+                        <p>欢迎交流！</p>
+                        <div class="a-href-box">
+                            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=173124552&site=qq&menu=yes">
+                                <img border="0" src="http://wpa.qq.com/pa?p=2:173124552:51" alt="大BUG" title="大BUG"/>
+                            </a>
+                            <a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=f9cb533de3ba27133b16a4988dd10b0acaddad9790cc33e9d8348922729892a7">
+                                <img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="聚繁分享" title="聚繁分享">
+                            </a>
+                            <a href="#" style="color: #1E9FFF;">更多联系方式</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-box layui-row">
+                <div class="textarea-box layui-row">
+                    <textarea placeholder="仅支持纯文本，如果有什么文字无法描述的问题、建议、意见，请加QQ群"></textarea>
+                </div>
+                <div class="text-num-tips layui-row">还可以输入<span>500</span>个字</div>
+                <div class="common-btnbox">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm"><i class="layui-icon">&#xe642;</i>留言</button>
+                    <button class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe66f;</i>登录</button>
+                </div>
+            </div>
+            <div class="comment-list layui-row">
+                <ul>
+                    <li>
+                        <div class="common-box-row layui-row">
+                            <div class="common-headimg layui-col-md1 layui-col-xs2">
+                                <div class="commonimg-box">
+                                    <img src="imgs/canreplace/headimg.jpg">
+                                </div>
+                            </div>
+                            <div class="common-info-row layui-col-md11 layui-col-xs10">
+                                <div class="common-nickname layui-row">2018-01-18 16:38<span>大BUG：</span></div>
+                                <div class="common-text layui-row">“每个强者都会有背后的辛酸挫折每个强者都会有背后的辛酸挫折”，说的非常好，条理清晰，通俗易懂，我这样的小白一看就懂，希望博主多分享一些类似文章。支持博主。都是按照已经用计算机语言编好的程序来执行的，程序是计算机要执行的指令的集合</div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-box">
+            <div class="main-content">
+                <strong>Copyright</strong> &nbsp;2019.01.16  &nbsp;by  &nbsp;<a href="#">大BUG</a><span>备案号：<a href="http://www.miitbeian.gov.cn/" target="_blank">蜀ICP备16031990号-2</a></span>
+            </div>
+        </div>
+    </footer>
+
+<script th:src="@{/home/plugin/prism/prism.js}"></script>
+<script th:src="@{/home/plugin/jquery/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/admin/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/admin/vendor/editor.md/js/editormd.js}"></script>
+<script th:src="@{/admin/vendor/editor.md/lib/marked.min.js}"></script>
+<script th:src="@{/admin/vendor/editor.md/lib/prettify.min.js}"></script>
+<script>
+    $(function () {
+        editormd.markdownToHTML("content",{
+            htmlDecode : "style,script,iframe|on*",
+            emoji: true,
+            taskList: true,
+            tocm : true,                  // Using [TOCM]
+            tex : true,                   // 开启科学公式TeX语言支持，默认关闭
+            flowChart : true,             // 开启流程图支持，默认关闭
+            sequenceDiagram : true,
+            codeFold: true
+        });
+    })
+    //然后在需要的位置调用如下方法
+    Prism.highlightAll();
+    $('pre').addClass("line-numbers").css("white-space", "pre-wrap");//显示行号
+    layui.use('laypage', function(){
+        var laypage = layui.laypage;
+
+        //执行一个laypage实例
+        laypage.render({
+            elem: 'pageItem', //注意，这里的 test1 是 ID，不用加 # 号
+            count: 50, //数据总数，从服务端得到
+            jump: function(obj, first){
+                //obj包含了当前分页的所有参数，比如：
+                console.log('当前页数：'+obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                console.log('每页数量：'+obj.limit); //得到每页显示的条数
+                //首次不执行
+                if(!first){
+                   console.log('执行')
+                }
+            }
+        });
+    });
+</script>
+<script th:src="@{/home/plugin/layui/layui.js}"></script>
+</body>
+</html>

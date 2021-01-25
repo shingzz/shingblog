@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzcheng.dao.ArticleDao">
+    <resultMap id="ArticleMap" type="com.zzcheng.pojo.Article">
+        <id property="articleId" column="article_id"></id>
+        <result property="articleTitle" column="article_title"/>
+        <result property="articleContent" column="article_content"/>
+        <result property="articleHtmlContent" column="article_html_content"/>
+        <result property="articleViewCount" column="article_view_count"/>
+        <result property="articleCommentCount" column="article_comment_count"/>
+        <result property="articleCreateTime" column="article_create_time"/>
+        <result property="articleUpdateTime" column="article_update_time"/>
+    </resultMap>
+    <select id="getLists" resultMap="ArticleMap">
+        select article_id, article_title, article_view_count, article_comment_count, article_create_time, article_update_time from article
+    </select>
+    <select id="getArticleById" resultMap="ArticleMap">
+        select * from article where article_id = #{id}
+    </select>
+    <insert id="insertArticle" parameterType="Article">
+        insert article(article_title,
+        article_content, article_html_content,
+        article_view_count, article_comment_count,
+        article_create_time, article_update_time)
+        values (#{articleTitle}, #{articleContent},
+        #{articleHtmlContent}, #{articleViewCount},
+        #{articleCommentCount}, #{articleCreateTime}, #{articleUpdateTime})
+    </insert>
+    <update id="updateArticle" parameterType="Article">
+        update article Set
+        article_title = #{articleTitle},
+        article_content = #{articleContent},
+        article_html_content = #{articleHtmlContent},
+        article_update_time = #{articleUpdateTime}
+        where article_id = #{articleId}
+    </update>
+    <delete id="deleteArticle">
+        delete from article where article_id = #{id}
+    </delete>
+</mapper>
