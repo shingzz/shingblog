@@ -3,21 +3,25 @@ package com.zzcheng.controller;
 import com.zzcheng.dao.ArticleDao;
 import com.zzcheng.pojo.Article;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin")
 public class ArticleController {
     @Autowired
     ArticleDao articleDao;
-
+    @Autowired
+    private Environment env;
     @RequestMapping("/articleList")
     public String articleList(Model model){
         List<Article> articles = articleDao.getLists();
@@ -28,10 +32,34 @@ public class ArticleController {
     public String articleAddPage(){
         return "admin/Article/add";
     }
-    @RequestMapping("/articleAdd1Page")
-    public String articleAdd1Page(){
-        return "admin/Article/add1";
+    @RequestMapping("/image")
+    @ResponseBody
+    public Map<String, Object> ImageUpload(@RequestParam(value = "editormd-image-file") MultipartFile file, HttpServletRequest request) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            String realPath = System.getProperties().getProperty("user.home")+"/image/";
+//            String realPath = request.getServletContext().getRealPath("/");
+            System.out.println(realPath);
+            String fileName = file.getOriginalFilename();
+            System.out.println(fileName);
+            String uuid = UUID.randomUUID().toString().replace("-", "");
+            fileName = uuid + "_" + fileName;
+            File targetFile = new File(realPath,fileName);
+            if(!targetFile.getParentFile().exists())
+                targetFile.getParentFile().mkdirs();
+            file.transferTo(targetFile);
+            result.put("success", 1);
+            result.put("message", "成功");
+            result.put("url", "/image/"+fileName);
+            return result;
+        } catch (IOException e) {
+            result.put("success", 0);
+            result.put("message", "上传失败");
+            return result;
+        }
+
     }
+
     @RequestMapping("/add")
     public String articleAdd(Article article){
         System.out.println(article);
