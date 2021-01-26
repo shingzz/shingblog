@@ -114,6 +114,7 @@
     <script th:src="@{/admin/vendor/editor.md/js/jquery.min.js}"></script>
     <script th:src="@{/admin/vendor/editor.md/js/editormd.min.js}"></script>
     <script th:src="@{/admin/vendor/editor.md/lib/flowchart.min.js}"></script>
+    <script th:src="@{/admin/js/img-upload.js}"></script>
     <script type="text/javascript">
         var testEditor;
 
@@ -132,8 +133,14 @@
                 sequenceDiagram : true,
                 codeFold: true,
                 path    : "/admin/vendor/editor.md/lib/",
+                imageUpload : true,
+                imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL : "/admin/image",
+                onload : function() {
+                    initPasteDragImg(this); //必须
+                },
                 toolbarIcons : function() {
-                    return ["undo", "redo", "|","bold", "italic","ucwords","uppercase","lowercase","|","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","table","datetime","hr",  "||",  "watch", "fullscreen", "preview", "releaseIcon", "index"]
+                    return ["undo", "redo", "|","bold", "italic","ucwords","uppercase","lowercase","|","h1","h2","h3","h4","h5","h6","|","image","list-ul","list-ol","table","datetime","hr",  "||",  "watch", "fullscreen", "preview", "releaseIcon", "index"]
                 },
 
                 /*自定义功能按钮，下面我自定义了2个，一个是发布，一个是返回首页*/
